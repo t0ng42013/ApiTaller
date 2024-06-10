@@ -23,7 +23,7 @@ export class Server {
    }
 
    private middelware():void {
-    this.app.use(express.json());+
+    this.app.use(express.json());
    }
 
    private routes():void {
