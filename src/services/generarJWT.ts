@@ -28,7 +28,7 @@ export const validarToken = (req:Request, res:Response,next:NextFunction) => {
             return res.status(401).json({msj:"invalido o expirado"})
         }else{
             //token valido
-            req.user = decod
+            // req.user = decod
             next();
         }
     })

@@ -1,5 +1,5 @@
 import express,{Express} from 'express';
-
+import cors from 'cors';
 import authRoutes from './src/routes/authRoutes';
 import indexRouter from './src/routes/indexRoutes';
 import { DB_Connection } from './src/database/config';
@@ -24,6 +24,7 @@ export class Server {
    }
 
    private middelware():void {
+      this.app.use(cors());
     this.app.use(express.json());
    }
 
