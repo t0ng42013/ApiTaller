@@ -38,3 +38,42 @@ export const createVehicle = async(req:Request,res:Response):Promise<void> => {
         throw new Error(error.message);
     }
 };
+
+export const getVehicles = async(req:Request, res:Response):Promise<void> =>{
+    const{id} = req.params;
+    try {
+        const vehicle = await Vehiculo.findById(id);
+        if(!vehicle){
+            res.status(404).json({ message:"El vehiculo no se encontro"});
+            return
+        }
+        res.status(200).json(vehicle);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const updateVehicle = async (req: Request, res: Response) => {
+    const{id}= req.params;
+    const {cliente,marca,model,year,km,patente}= req.body;
+
+    try {
+        let updateVehicle = await Vehiculo.findByIdAndUpdate(id,{
+            cliente,
+            marca,
+            model,
+            year,
+            km,
+            patente
+        },{new:true})
+
+        if(!updateVehicle){
+            res.status(404).json({msg:"vehiculo no encontrado"})
+            return
+        }
+        res.status(200).json(updateVehicle)
+
+    } catch (error) {
+        console.log(error)
+    }
+};
