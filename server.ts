@@ -1,6 +1,7 @@
 import express,{Express} from 'express';
 import cors from 'cors';
 import authRoutes from './src/routes/authRoutes';
+import clientRoutes from './src/routes/clientRoutes';
 import indexRouter from './src/routes/indexRoutes';
 import { DB_Connection } from './src/database/config';
 
@@ -10,6 +11,7 @@ export class Server {
    private port: number | string;
    private authPath: string;
    private indexPath: string;
+   private clientPath:string;
 
    constructor (){
 
@@ -17,6 +19,7 @@ export class Server {
     this.port = process.env.PORT || 3000;
     this.authPath = '/auth';
     this.indexPath = '/';
+    this.clientPath = '/client';
   
     this.middelware();
     this.conectarDB();
@@ -31,6 +34,7 @@ export class Server {
    private routes():void {
     this.app.use(this.indexPath, indexRouter);
     this.app.use(this.authPath, authRoutes);
+    this.app.use(this.clientPath, clientRoutes);
    }
 
    async conectarDB():Promise<void> {
