@@ -2,6 +2,8 @@ import express,{Express} from 'express';
 import cors from 'cors';
 import authRoutes from './src/routes/authRoutes';
 import clientRoutes from './src/routes/clientRoutes';
+import vehicleRoutes from './src/routes/vehicleRoutes';
+// import workoutes from './src/routes/';
 import indexRouter from './src/routes/indexRoutes';
 import { DB_Connection } from './src/database/config';
 
@@ -12,6 +14,8 @@ export class Server {
    private authPath: string;
    private indexPath: string;
    private clientPath:string;
+   private vehicletPath:string;
+   private workPath:string;
 
    constructor (){
 
@@ -20,6 +24,8 @@ export class Server {
     this.authPath = '/auth';
     this.indexPath = '/';
     this.clientPath = '/client';
+    this.vehicletPath = '/vehicle';
+    this.workPath = '/work';
   
     this.conectarDB();
     this.middelware();
@@ -39,6 +45,8 @@ export class Server {
     this.app.use(this.indexPath, indexRouter);
     this.app.use(this.authPath, authRoutes);
     this.app.use(this.clientPath, clientRoutes);
+    this.app.use(this.vehicletPath, vehicleRoutes);
+   //  this.app.use(this.workPath,this.workRoutes);
    }
 
  ;
