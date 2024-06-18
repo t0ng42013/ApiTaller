@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     </html>
     `
 res.status(200).json({message: 'API'});
-res.status(200).send(htmlTemplate);
+// res.status(200).send(htmlTemplate);
 });
 
 export default router;
