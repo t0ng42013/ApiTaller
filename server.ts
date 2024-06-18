@@ -21,11 +21,15 @@ export class Server {
     this.indexPath = '/';
     this.clientPath = '/client';
   
-    this.middelware();
     this.conectarDB();
+    this.middelware();
     this.routes();
    }
-
+  
+   async conectarDB():Promise<void> {
+      await DB_Connection();
+   }
+   
    private middelware():void {
       this.app.use(cors());
     this.app.use(express.json());
@@ -37,9 +41,7 @@ export class Server {
     this.app.use(this.clientPath, clientRoutes);
    }
 
-   async conectarDB():Promise<void> {
-      await DB_Connection();
-   };
+ ;
 
    public start ():void {
     this.app.listen(this.port,() => {console.log(`Server started on ${this.port}`);});
