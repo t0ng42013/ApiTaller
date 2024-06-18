@@ -8,16 +8,15 @@ import { errores } from '../helper/errores';
 const router = express.Router();
 
 router.post('/register',[
-    check("nombre","El nombre es obligatorio").not().isEmpty(),
+    
     check("password","El password es obligatorio").isLength({min:6}),
     check("email").custom(existingEmail),
     errores
 ],register);
 
 router.post('/login',[
-    check("nombre","El nombre es obligatorio").not().isEmpty(),
+    check("email","El email es obligatorio").isEmail(),
     check("password","El password es obligatorio").isLength({min:6}),
-    check("email").custom(existingEmail),
     errores
 ],login);
 

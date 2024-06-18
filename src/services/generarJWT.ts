@@ -1,14 +1,15 @@
 import jwt from 'jsonwebtoken';
-import { IUSer } from '../interface/IUser';
 import { NextFunction, Request, Response } from 'express';
 
-const JWT_SECRET = process.env.JWT_SECRET_KEY;
 
-export const generateToken = (usuario:IUSer):string => {
+
+export const generateToken = (id: string): string => {
     try {
-        return  jwt.sign({},JWT_SECRET!,{expiresIn:'4hs'});
+        const token = jwt.sign({ id }, process.env.JWT_SECRET_KEY as string, { expiresIn: '4h' });
+        return token;
     } catch (error) {
-        throw new Error('Error generating token || env');
+        console.error('Error generating token:', error);
+        throw new Error('Error generating token');
     }
 };
 
@@ -23,7 +24,7 @@ export const validarToken = (req:Request, res:Response,next:NextFunction) => {
     }
 
     //verificar y decodificar el token
-    jwt.verify(token,JWT_SECRET!,(err,decod)=>{
+    jwt.verify(token,process.env.JWT_SECRET_KEY as string,(err,decod)=>{
         if(err){
             return res.status(401).json({msj:"invalido o expirado"})
         }else{

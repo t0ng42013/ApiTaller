@@ -8,7 +8,7 @@ import { generateToken } from "../services/generarJWT";
 export const register = async (req:Request, res:Response):Promise<void> => {
 
     const {email, password} = req.body;
-    const usuario = new Usuario(email, password);
+    const usuario = new Usuario({email, password});
 
     try {
         usuario.password = await hashPassword(password);
@@ -40,6 +40,6 @@ export const login = async (req:Request, res:Response):Promise<void> => {
         res.status(200).json({token});
 
     } catch (error) {
-        throw new Error('Error login');
+        throw new Error('Error login'+error);
     }
 };
