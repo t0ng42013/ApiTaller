@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 export const DB_Connection = async():Promise<void> => {
     try {
         const url = process.env.DB_URL
-
+        console.log(url)
         if (!url) {
             throw new Error("Invalid URL: " + url);
         }
