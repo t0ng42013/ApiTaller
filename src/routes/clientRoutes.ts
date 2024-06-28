@@ -4,8 +4,8 @@ import { validarToken } from '../services/generarJWT';
 
 
 const router = express.Router();
-router.get('/',getAllClient )
-router.post('/',createClient)
+router.get('/',validarToken,getAllClient )
+router.post('/',validarToken,createClient)
 router.get('/:id', validarToken,getClient )
 router.put('/:id',validarToken ,updateClient)
 
